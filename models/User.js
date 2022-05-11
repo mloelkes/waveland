@@ -2,10 +2,14 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
     name: {
       type: String,
       required: true,
-      unique: true
     },
     image: String,
     location: String,
@@ -13,31 +17,31 @@ const userSchema = new Schema(
     tracks: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Track'
-      }
+        ref: "Track",
+      },
     ],
     likes: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Track'
-      }
+        ref: "Track",
+      },
     ],
     following: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
+        ref: "User",
+      },
     ],
     followers: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User'
-      }
+        ref: "User",
+      },
     ],
     password: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   {
     timestamps: true,

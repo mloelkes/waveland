@@ -11,23 +11,23 @@ const trackSchema = new Schema(
     link: String,
     user: {
       type: Schema.Types.ObjectId,
-      ref: 'User'
+      ref: "User",
     },
     comments: [
       {
         user: {
           type: Schema.Types.ObjectId,
-          ref: 'User',
+          ref: "User",
         },
-        description: String
-      }
+        description: String,
+      },
     ],
     likes: [
       {
         type: Schema.Types.ObjectId,
-          ref: 'User',
-      }
-    ]
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,
