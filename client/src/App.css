@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;700&display=swap');
+
+:root {
+    --background: rgb(236, 229, 237);
+    --font: #000;
+    --font-accent: rgb(114, 40, 233);
+    --font-hover: rgb(114, 40, 233);
+    --accent: red;
+    --hover: yellow;
+    --border: #000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Radio Canada', sans-serif;
+    font-size: 20px;
+    background-color: var(--background);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Generic styles */
+
+h1, h2, h3, h4, h5, h6, p, a, Link {
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--font);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.font-accent {
+    color: var(--font-accent);
 }
 
-.App-link {
-  color: #61dafb;
+.link:hover {
+    color: var(--font-hover);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Navigation component */
+
+.Navigation {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    border-bottom: 2px solid var(--border);
+}
+
+.navigation-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    margin: 0 60px;
+}
+
+.navigation-content span > .link {
+    margin-left: 30px;
+}
+
+.Home {
+    padding-top: 300px;
 }
