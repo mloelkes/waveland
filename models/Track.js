@@ -9,6 +9,7 @@ const trackSchema = new Schema(
     tag: String,
     description: String,
     link: String,
+    image: String,
     user: {
       type: Schema.Types.ObjectId,
       ref: "User",

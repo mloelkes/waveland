@@ -3,9 +3,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { isAuthenticated } = require("../middleware/jwt");
 const User = require("../models/User");
+const imageUploader = require("../config/cloudinary.images.config");
 
+// User signup
 router.post("/signup", (req, res, next) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, location, description } = req.body;
 
   if (email === "" || password === "" || name === "") {
     res.status(400).json({ message: "Provide email, password and name" });
@@ -25,10 +27,10 @@ router.post("/signup", (req, res, next) => {
 
     const salt = bcrypt.genSaltSync();
     const hashedPassword = bcrypt.hashSync(password, salt);
-    return User.create({ email, password: hashedPassword, name })
+    return User.create({ email, password: hashedPassword, name, location, description })
       .then((createdUser) => {
-        const { email, name, _id } = createdUser;
-        const user = { email, name, _id };
+        const { email, name, location, description, _id } = createdUser;
+        const user = { email, name, location, description, _id };
         res.status(201).json({ user: user });
       })
       .catch((err) => {
@@ -38,6 +40,7 @@ router.post("/signup", (req, res, next) => {
   });
 });
 
+// User login
 router.post("/login", (req, res, next) => {
   const { email, password } = req.body;
 
@@ -73,6 +76,38 @@ router.post("/login", (req, res, next) => {
     });
 });
 
+// Get user by ID
+router.get("/users/:id", (req, res, next) => {
+  const id = req.params.id;
+
+  if (id === "") {
+    res.status(400).json({ message: "Provide id" });
+    return;
+  }
+
+  User.findById(id)
+    .then((user) => {
+      if (!user) {
+        res.status(400).json({ message: "User not found" });
+        return;
+      }
+
+      res.status(200).json(user);
+    })
+    .catch((err) => next(err));
+});
+
+// File upload on cloudinary
+router.post("/imageUpload", imageUploader.single("fileUrl"), (req, res, next) => {
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+
+  res.json({ fileUrl: req.file.path });
+});
+
+// Verify user
 router.get("/verify", isAuthenticated, (req, res, next) => {
   console.log("request payload is: ", req.payload);
   res.status(200).json(req.payload);
