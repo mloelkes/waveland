@@ -3,11 +3,11 @@ function UserDetails(props) {
 
     return (
         <div className="UserDetails">
-            <p>Username: {user.name}</p>
-            <p>E-Mail: {user.email}</p>
-            {user.tracks && user.tracks.map(track => (
+            <p>Username: {user?.name}</p>
+            <p>E-Mail: {user?.email}</p>
+            {/* {user.tracks && user.tracks.map(track => (
                 <p>track.name</p>
-            ))}
+            ))} */}
         </div>
     )
 }
