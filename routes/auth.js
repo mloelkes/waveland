@@ -7,10 +7,11 @@ const imageUploader = require("../config/cloudinary.images.config");
 
 // User signup
 router.post("/signup", (req, res, next) => {
+    console.log("signup called")
   const { email, password, name, location, description } = req.body;
 
   if (email === "" || password === "" || name === "") {
-    res.status(400).json({ message: "Provide email, password and name" });
+    res.status(400).json({ message: "Please provide email, password and name." });
     return;
   }
 

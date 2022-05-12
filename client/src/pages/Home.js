@@ -4,7 +4,7 @@ export default function Home() {
 	return (
         <div className="Home">
 
-		    <h1>This is the Home Page 🏠</h1>
+		    <h1>Share your tracks with the world</h1>
         </div>
 	)
 }

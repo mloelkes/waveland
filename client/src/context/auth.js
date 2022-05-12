@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 
 const AuthContext = React.createContext()
 
@@ -10,14 +10,14 @@ function AuthProviderWrapper(props) {
 
 	const storeToken = token => {
 		// store this token in local storage
-		localStorage.setItem('authToken', token)
+		localStorage.setItem("authToken", token)
 	}
 
 	const verifyStoredToken = () => {
 		// check local storage if there is a token
-		const storedToken = localStorage.getItem('authToken')
+		const storedToken = localStorage.getItem("authToken")
 		if (storeToken) {
-			return axios.get('/api/auth/verify', { headers: { Authorization: `Bearer ${storedToken}` } })
+			return axios.get("/api/auth/verify", { headers: { Authorization: `Bearer ${storedToken}` } })
 				.then(response => {
 					const user = response.data
 					setUser(user)
@@ -38,7 +38,7 @@ function AuthProviderWrapper(props) {
 
 	const logoutUser = () => {
 		// remove the token from local storage
-		localStorage.removeItem('authToken')
+		localStorage.removeItem("authToken")
 		// update the state
 		setIsLoggedIn(false)
 		setUser(null)

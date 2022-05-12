@@ -7,7 +7,7 @@ function Navigation() {
         <Link className="font-accent" to="/">Waveland</Link>
         <span>
           <Link className="link" to="/login">Login</Link>
-          <Link className="link" to="/signup">Signup</Link>
+          <Link className="link" to="/signup">Sign Up</Link>
         </span>
       </div>
 

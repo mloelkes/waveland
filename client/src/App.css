@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 
 :root {
-    --background: rgb(236, 229, 237);
-    --font: #000;
+    --background: rgb(226, 227, 229);
+    --background-focus: rgb(220, 221, 223);
+    --font: rgb(0, 0, 0);
     --font-accent: rgb(114, 40, 233);
     --font-hover: rgb(114, 40, 233);
-    --accent: red;
-    --hover: yellow;
-    --border: #000;
+    --hover: rgb(114, 40, 233);
+    --accent: rgb(114, 40, 233);
+    --border: rgb(0, 0, 0);
+    --primary-background: rgb(0, 0, 0);
+    --primary-font: rgb(255, 255, 255);
 }
 
 body {
@@ -26,12 +31,62 @@ h1, h2, h3, h4, h5, h6, p, a, Link {
     color: var(--font);
 }
 
+h1 {
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-family: 'Vollkorn', serif;
+}
+
+p {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+::placeholder {
+    color: var(--font);
+    opacity: 1;
+}
+
+input, button {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 300px;
+    height: 60px;
+    padding: 0 20px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--background);
+    outline: none;
+    font-family: 'Radio Canada', sans-serif;
+    font-size: 16px;
+}
+
+input:focus {
+    background-color: var(--background-focus);
+}
+
+#description {
+    width: 640px;
+}
+
 .font-accent {
     color: var(--font-accent);
 }
 
 .link:hover {
     color: var(--font-hover);
+}
+
+.primary-button {
+    background-color: var(--primary-background);
+    color: var(--primary-font);
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background-color: var(--hover);
+    border-color: var(--hover);
 }
 
 /* Navigation component */
@@ -44,6 +99,7 @@ h1, h2, h3, h4, h5, h6, p, a, Link {
     position: fixed;
     top: 0;
     border-bottom: 2px solid var(--border);
+    background-color: var(--background);
 }
 
 .navigation-content {
@@ -58,6 +114,57 @@ h1, h2, h3, h4, h5, h6, p, a, Link {
     margin-left: 30px;
 }
 
+/* Homepage */
+
 .Home {
-    padding-top: 300px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
 }
+
+/* Sign Up page */
+
+.Signup {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Signup form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.Signup form input, .Signup form button {
+    margin: 20px 20px;
+}
+
+/* Login Page */
+
+.Login {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Login form input, .Login form button {
+    margin: 20px 20px;
+}
+
+
+
