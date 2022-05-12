@@ -11,7 +11,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    image: String,
+    imageUrl: String,
     location: String,
     description: String,
     tracks: [

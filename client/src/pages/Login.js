@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.js";
 
-export default function Login() {
+function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -30,7 +30,7 @@ export default function Login() {
             storeToken(token);
             verifyStoredToken()
 					.then(() => {
-						navigate("/user");
+						navigate("/dashboard");
 					})
         })
         .catch(err => {
@@ -54,3 +54,5 @@ export default function Login() {
         </div>
 	)
 }
+
+export default Login;

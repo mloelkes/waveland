@@ -4,6 +4,7 @@
 
 :root {
     --background: rgb(226, 227, 229);
+    --background-dark: rgb(210, 211, 213);
     --background-focus: rgb(220, 221, 223);
     --font: rgb(0, 0, 0);
     --font-accent: rgb(114, 40, 233);
@@ -64,10 +65,6 @@ input, button {
 
 input:focus {
     background-color: var(--background-focus);
-}
-
-#description {
-    width: 640px;
 }
 
 .font-accent {
@@ -146,6 +143,25 @@ input:focus {
     margin: 20px 20px;
 }
 
+.Signup form #upload-picture-button {
+    text-align: left;
+    cursor: pointer;
+}
+
+.Signup form #upload-picture-button-disabled {
+    text-align: left;
+    cursor: pointer;
+    background-color: var(--background-dark);
+}
+
+.Signup form #upload-picture-button:hover {
+    background-color: var(--background-focus);
+}
+
+.Signup form #upload-picture {
+    display: none;
+}
+
 /* Login Page */
 
 .Login {
@@ -165,6 +181,27 @@ input:focus {
 .Login form input, .Login form button {
     margin: 20px 20px;
 }
+
+/* Dashboard */
+
+.Dashboard {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.UserDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
 
 
 

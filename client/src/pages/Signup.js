@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Signup() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
-    const [location, setLocation] = useState('');
-    const [description, setDescription] = useState('');
+function Signup() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [location, setLocation] = useState("");
+    const [description, setDescription] = useState("");
+    const [fileToUpload, setFileToUpload] = useState(undefined);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const navigate = useNavigate();
@@ -35,18 +36,34 @@ export default function Signup() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const requestBody = { email, password, name, location, description }
+        const uploadData = new FormData();
+        uploadData.append("imageUrl", fileToUpload);
 
-        axios.post("/api/auth/signup", requestBody)
+        axios.post("api/auth/imageUpload", uploadData)
         .then(response => {
-            navigate("/")
+            const imageUrl = response.data.imageUrl;
+            const requestBody = { email, password, name, location, description, imageUrl }
+            axios.post("/api/auth/signup", requestBody)
+            .then(response => {
+                navigate("/dashboard");
+            })
+            .catch(err => {
+                const errorDescription = err.response.data.message;
+                setErrorMessage(errorDescription);
+            })
         })
-        .catch(err => {
-            const errorDescription = err.response.data.message;
-            setErrorMessage(errorDescription);
-        })
+        .catch(err => console.log("Error while uploading the file: ", err));
+    };
+
+    function handleFileUploadButtonClick(e) {
+        e.target.id = "upload-picture-button-disabled";
+        document.getElementById("upload-picture").click();
     }
     
+    function handleFileToUploadChange(e) {
+        setFileToUpload(e.target.files[0]);
+    }
+
 	return (
         <div className="Signup">
 
@@ -54,17 +71,22 @@ export default function Signup() {
             <form onSubmit={handleSubmit}>
                 <span>
                     <input type="text" placeholder="E-Mail" value={email} onChange={handleEmail}></input>
-                    <input type="text" placeholder="Password" value={password} onChange={handlePassword}></input>
+                    <input type="password" placeholder="Password" value={password} onChange={handlePassword}></input>
                 </span>
                 <span>
                     <input type="text" placeholder="Name" value={name} onChange={handleName}></input>
                     <input type="text" placeholder="Location" value={location} onChange={handleLocation}></input>
                 </span>
-                
-                <input id="description" placeholder="Description" value={description} onChange={handleDescription}></input>
+                <span>
+                    <input placeholder="Description" value={description} onChange={handleDescription}></input>
+                    <input type="button" id="upload-picture-button" value="Upload profile picture" onClick={(e) => handleFileUploadButtonClick(e)}/>
+                    <input id="upload-picture" type="file" onChange={(e) => handleFileToUploadChange(e)}></input>
+                </span>
                 <button className="primary-button" type="submit">Sign Up</button>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
         </div>
 	)
 }
+
+export default Signup;
