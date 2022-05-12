@@ -3,8 +3,9 @@ import React from 'react'
 function Home() {
 	return (
         <div className="Home">
-
-		    <h1>Share your tracks with the world</h1>
+            <div className="message">
+                <h1>Share your ideas and tracks with the world.</h1>
+            </div>
         </div>
 	)
 }

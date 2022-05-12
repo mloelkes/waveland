@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap');
 
 :root {
     --background: rgb(226, 227, 229);
     --background-dark: rgb(210, 211, 213);
     --background-focus: rgb(220, 221, 223);
+    --button-hover: rgb(226, 227, 229, 0.2);
     --font: rgb(0, 0, 0);
-    --font-accent: rgb(114, 40, 233);
-    --font-hover: rgb(114, 40, 233);
-    --hover: rgb(114, 40, 233);
-    --accent: rgb(114, 40, 233);
+    --font-accent: rgb(125, 53, 218);
+    --font-hover: rgb(125, 53, 218);
+    --hover: rgb(125, 53, 218);
+    --accent: rgb(125, 53, 218);
     --border: rgb(0, 0, 0);
     --primary-background: rgb(0, 0, 0);
     --primary-font: rgb(255, 255, 255);
@@ -57,14 +57,14 @@ input, button {
     padding: 0 20px;
     border: 2px solid var(--border);
     border-radius: 10px;
-    background-color: var(--background);
+    background: transparent;
     outline: none;
     font-family: 'Radio Canada', sans-serif;
     font-size: 16px;
 }
 
 input:focus {
-    background-color: var(--background-focus);
+    background-color: var(--button-hover);
 }
 
 .font-accent {
@@ -120,6 +120,18 @@ input:focus {
     background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
     background-position: center;
     background-size: cover;
+    overflow: hidden;
+}
+
+.Home .message {
+    width: 80vw;
+    padding: 0 0 0 60px;
+}
+
+.Home h1 {
+    font-size: 150px;
+    line-height: 1.2;
+    color: var(--font);
 }
 
 /* Sign Up page */
@@ -130,6 +142,9 @@ input:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
 .Signup form {
@@ -151,11 +166,11 @@ input:focus {
 .Signup form #upload-picture-button-disabled {
     text-align: left;
     cursor: pointer;
-    background-color: var(--background-dark);
+    background-color: var(--button-hover);
 }
 
 .Signup form #upload-picture-button:hover {
-    background-color: var(--background-focus);
+    background-color: var(--button-hover);
 }
 
 .Signup form #upload-picture {
@@ -170,6 +185,9 @@ input:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
 .Login form {
