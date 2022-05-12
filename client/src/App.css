@@ -207,7 +207,10 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
 }
 
 .UserDetails {

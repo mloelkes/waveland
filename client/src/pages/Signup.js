@@ -10,6 +10,7 @@ function Signup() {
     const [description, setDescription] = useState("");
     const [fileToUpload, setFileToUpload] = useState(undefined);
     const [errorMessage, setErrorMessage] = useState(undefined);
+    const [uploadPictureLabel, setUploadPictureLabel] = useState("Choose profile picture");
 
     const navigate = useNavigate();
 
@@ -61,7 +62,9 @@ function Signup() {
     }
     
     function handleFileToUploadChange(e) {
-        setFileToUpload(e.target.files[0]);
+        const file = e.target.files[0];
+        setFileToUpload(file);
+        setUploadPictureLabel(file.name);
     }
 
 	return (
@@ -79,7 +82,7 @@ function Signup() {
                 </span>
                 <span>
                     <input placeholder="Description" value={description} onChange={handleDescription}></input>
-                    <input type="button" id="upload-picture-button" value="Upload profile picture" onClick={(e) => handleFileUploadButtonClick(e)}/>
+                    <input type="button" id="upload-picture-button" value={uploadPictureLabel} onClick={(e) => handleFileUploadButtonClick(e)}/>
                     <input id="upload-picture" type="file" onChange={(e) => handleFileToUploadChange(e)}></input>
                 </span>
                 <button className="primary-button" type="submit">Sign Up</button>
