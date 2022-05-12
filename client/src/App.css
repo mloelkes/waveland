@@ -124,13 +124,13 @@ input:focus {
 }
 
 .Home .message {
-    width: 80vw;
+    width: 60vw;
     padding: 0 0 0 60px;
 }
 
 .Home h1 {
-    font-size: 150px;
-    line-height: 1.2;
+    font-size: 120px;
+    line-height: 1.3;
     color: var(--font);
 }
 
