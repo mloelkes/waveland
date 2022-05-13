@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.js";
+import { UserDetailsContext } from "../context/userDetails.js";
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -11,6 +12,7 @@ function Login() {
     const navigate = useNavigate();
 
     const { storeToken, verifyStoredToken } = useContext(AuthContext);
+    const { getUserDetails } = useContext(UserDetailsContext);
 
     function handleEmail(e) {
         setEmail(e.target.value);
@@ -30,6 +32,7 @@ function Login() {
             storeToken(token);
             verifyStoredToken()
 					.then(() => {
+                        getUserDetails();
 						navigate("/dashboard");
 					})
         })
@@ -45,7 +48,7 @@ function Login() {
             <form onSubmit={handleSubmit}>
 
                     <input type="text" placeholder="E-Mail" value={email} onChange={handleEmail}></input>
-                    <input type="text" placeholder="Password" value={password} onChange={handlePassword}></input>
+                    <input type="password" placeholder="Password" value={password} onChange={handlePassword}></input>
 
                 <button className="primary-button" type="submit">Login</button>
             </form>

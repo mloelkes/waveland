@@ -89,28 +89,7 @@ router.post("/login", (req, res, next) => {
         });
 });
 
-// Get user by ID
-router.get("/users/:id", (req, res, next) => {
-    const id = req.params.id;
-
-    if (id === "") {
-        res.status(400).json({ message: "Provide id" });
-        return;
-    }
-
-    User.findById(id)
-        .then((user) => {
-            if (!user) {
-                res.status(400).json({ message: "User not found" });
-                return;
-            }
-
-            res.status(200).json(user);
-        })
-        .catch((err) => next(err));
-});
-
-// File upload on cloudinary
+// Image upload on cloudinary
 router.post("/imageUpload", imageUploader.single("imageUrl"), (req, res, next) => {
     if (!req.file) {
         next(new Error("No file uploaded!"));

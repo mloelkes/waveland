@@ -210,12 +210,23 @@ input:focus {
     background-size: cover;
 }
 
+/* UserDetails Component */
+
 .UserDetails {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
+.UserDetails #profile-picture {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+
 
 
 

@@ -1,18 +1,24 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/auth.js";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/auth.js";
+import { UserDetailsContext } from "../context/userDetails.js";
 
 function Navigation() {
-    const { user, isLoggedIn, logoutUser } = useContext(AuthContext);
+    const { isLoggedIn, logoutUser } = useContext(AuthContext);
+    const { resetUserDetails } = useContext(UserDetailsContext);
 
     function handleLogoutClick() {
         logoutUser();
+        resetUserDetails();
     }
 
     return (
         <div className="Navigation">
             <div className="navigation-content">
-                <Link className="font-accent" to="/">Waveland</Link>
+                {isLoggedIn ?
+                    <Link className="font-accent" to="/dashboard">Waveland</Link> :
+                    <Link className="font-accent" to="/">Waveland</Link>
+                }
                 {isLoggedIn ? 
                     <Link className="link" to="/" onClick={handleLogoutClick}>Logout</Link> :
                 <span>

@@ -48,8 +48,8 @@ function Signup() {
             // Create user
             const requestBody = { email, password, name, location, description, imageUrl }
             axios.post("/api/auth/signup", requestBody)
-            .then(response => {
-                navigate("/dashboard");
+            .then(() => {
+                navigate("/login");
             })
             .catch(err => {
                 const errorDescription = err.response.data.message;
