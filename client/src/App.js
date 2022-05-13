@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Navigation from "./components/Navigation";
+import Upload from "./pages/Upload";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/upload" element={<Upload />} />
             </Routes>
         </div>
     );

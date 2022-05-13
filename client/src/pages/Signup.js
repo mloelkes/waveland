@@ -8,9 +8,9 @@ function Signup() {
     const [name, setName] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
-    const [fileToUpload, setFileToUpload] = useState(undefined);
+    const [imageToUpload, setImageToUpload] = useState(undefined);
+    const [uploadImageLabel, setUploadImageLabel] = useState("Choose profile picture");
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const [uploadPictureLabel, setUploadPictureLabel] = useState("Choose profile picture");
 
     const navigate = useNavigate();
 
@@ -39,14 +39,19 @@ function Signup() {
 
         // Upload file
         const uploadData = new FormData();
-        uploadData.append("imageUrl", fileToUpload);
+        uploadData.append("imageUrl", imageToUpload);
 
         axios.post("api/auth/imageUpload", uploadData)
         .then(response => {
             const imageUrl = response.data.imageUrl;
 
+            const tracks = [];
+            const followers = [];
+            const following = [];
+            const likes = [];
+
             // Create user
-            const requestBody = { email, password, name, location, description, imageUrl }
+            const requestBody = { email, password, name, location, description, imageUrl, tracks, followers, following, likes }
             axios.post("/api/auth/signup", requestBody)
             .then(() => {
                 navigate("/login");
@@ -56,18 +61,21 @@ function Signup() {
                 setErrorMessage(errorDescription);
             })
         })
-        .catch(err => console.log("Error while uploading the file: ", err));
+        .catch(err => {
+            const errorDescription = err.response.data.message;
+            setErrorMessage(errorDescription);
+        });
     };
 
-    function handleFileUploadButtonClick(e) {
-        e.target.id = "upload-picture-button-disabled";
-        document.getElementById("upload-picture").click();
+    function handleImageUploadButtonClick(e) {
+        e.target.id = "upload-image-button-disabled";
+        document.getElementById("upload-image").click();
     }
     
-    function handleFileToUploadChange(e) {
+    function handleImageToUploadChange(e) {
         const file = e.target.files[0];
-        setFileToUpload(file);
-        setUploadPictureLabel(file.name);
+        setImageToUpload(file);
+        setUploadImageLabel(file.name);
     }
 
 	return (
@@ -85,8 +93,8 @@ function Signup() {
                 </span>
                 <span>
                     <input placeholder="Description" value={description} onChange={handleDescription}></input>
-                    <input type="button" id="upload-picture-button" value={uploadPictureLabel} onClick={(e) => handleFileUploadButtonClick(e)}/>
-                    <input id="upload-picture" type="file" onChange={(e) => handleFileToUploadChange(e)}></input>
+                    <input type="button" id="upload-image-button" value={uploadImageLabel} onClick={(e) => handleImageUploadButtonClick(e)}/>
+                    <input id="upload-image" type="file" onChange={(e) => handleImageToUploadChange(e)}></input>
                 </span>
                 <button className="primary-button" type="submit">Sign Up</button>
             </form>

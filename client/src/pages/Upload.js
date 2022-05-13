@@ -1,18 +1,10 @@
-import React, { useState, useContext } from "react";
-import { AuthContext } from "../context/auth.js";
 import UploadForm from "../components/UploadForm.js";
 
 function Upload() {
-
-    const { user } = useContext(AuthContext);
-    
-
 	return (
         <div className="Upload">
-
+            <h1>Upload your tracks</h1>
             <UploadForm></UploadForm>
-
-
         </div>
 	)
 }

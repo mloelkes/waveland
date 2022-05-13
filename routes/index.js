@@ -10,7 +10,7 @@ router.get("/users/:id", isAuthenticated, (req, res, next) => {
     const id = req.params.id;
 
     if (id === "") {
-        res.status(400).json({ message: "Provide id" });
+        res.status(400).json({ message: "Please provide id" });
         return;
     }
 
@@ -30,6 +30,30 @@ router.get("/users/:id", isAuthenticated, (req, res, next) => {
         .catch((err) => next(err));
 });
 
+// Update user tracks
+router.patch("/users/:id/tracks", (req, res, next) => {
+    console.log("Update user tracks called", req.body);
+    const id = req.params.id;
+    const { tracks } = req.body;
+
+    if (id === "" || tracks === undefined) {
+        res.status(400).json({
+            message: "Please provide id and tracks to update."
+        });
+
+        return;
+    }
+
+    User.findByIdAndUpdate(id, { tracks })
+    .then(response => {
+        res.status(200).json(response);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    })
+})
+
 // Get track by ID
 router.get("/tracks/:id", (req, res, next) => {
   const id = req.params.id;
@@ -40,7 +64,7 @@ router.get("/tracks/:id", (req, res, next) => {
   }
 
   Track.findById(id)
-    .then((track) => {
+    .then(track => {
       if (!track) {
         res.status(400).json({ message: "Track not found" });
         return;
@@ -48,11 +72,46 @@ router.get("/tracks/:id", (req, res, next) => {
 
       res.status(200).json(track);
     })
-    .catch((err) => next(err));
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    })
+});
+
+// Create track
+router.post("/tracks", (req, res, next) => {
+    console.log("Create track called", req.body);
+    const { name, tag, description, imageUrl, trackUrl } = req.body;
+
+    if (name === "" || trackUrl === "") {
+        res.status(400).json({
+            message: "Please provide name and track to upload.",
+        });
+
+        return;
+    };
+
+    return Track.create({
+        name,
+        tag,
+        description,
+        imageUrl,
+        trackUrl,
+    })
+    .then((createdTrack) => {
+        const { name, tag, description, imageUrl, trackUrl, _id } = createdTrack;
+        const track = { name, tag, description, imageUrl, trackUrl, _id };
+        res.status(201).json({ track: track });
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
+    });
 });
 
 // Image upload on cloudinary
 router.post("/imageUpload", imageUploader.single("imageUrl"), (req, res, next) => {
+    console.log("Upload image called", req.body);
     if (!req.file) {
         next(new Error("Image upload failed."));
         return;
@@ -62,13 +121,13 @@ router.post("/imageUpload", imageUploader.single("imageUrl"), (req, res, next) =
 });
 
 // Track upload on cloudinary
-router.post("/trackUpload", trackUploader.single("fileUrl"), (req, res, next) => {
+router.post("/trackUpload", trackUploader.single("trackUrl"), (req, res, next) => {
   if (!req.file) {
-    next(new Error("File upload failed."));
+    next(new Error("Track upload failed."));
     return;
   }
 
-  res.json({ fileUrl: req.file.path });
+  res.json({ trackUrl: req.file.path });
 });
 
 module.exports = router;

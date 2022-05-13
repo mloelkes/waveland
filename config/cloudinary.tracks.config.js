@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     allowed_formats: ["wav", "mp3"],
-    folder: "tracks", // The name of the folder in cloudinary
+    folder: "tracks",
     resource_type: "video"
   },
 });

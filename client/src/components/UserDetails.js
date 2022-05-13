@@ -13,19 +13,19 @@ function UserDetails() {
             <p>Location: {userDetails?.location}</p>
             <p>Tracks:</p>
             {userDetails?.tracks && userDetails.tracks.map(track => (
-                <p>track.name</p>
+                <p key={track._id}>{track.name}</p>
             ))}
             <p>Likes:</p>
             {userDetails?.likes && userDetails.likes.map(likedTrack => (
-                <p>likedTrack.name</p>
+                <p key={likedTrack._id}>{likedTrack.name}</p>
             ))}
             <p>Following:</p>
             {userDetails?.following && userDetails.following.map(followedUser => (
-                <p>followedUser.name</p>
+                <p key={followedUser._id}>{followedUser.name}</p>
             ))}
             <p>Followers:</p>
             {userDetails?.followers && userDetails.followers.map(followingUser => (
-                <p>followingUser.name</p>
+                <p key={followingUser._id}>{followingUser.name}</p>
             ))}
         </div>
     )
