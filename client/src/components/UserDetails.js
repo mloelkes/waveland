@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { UserDetailsContext } from "../context/userDetails.js";
 
 function UserDetails() {
