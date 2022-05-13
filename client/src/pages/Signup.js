@@ -37,12 +37,15 @@ function Signup() {
     function handleSubmit(e) {
         e.preventDefault();
 
+        // Upload file
         const uploadData = new FormData();
         uploadData.append("imageUrl", fileToUpload);
 
         axios.post("api/auth/imageUpload", uploadData)
         .then(response => {
             const imageUrl = response.data.imageUrl;
+
+            // Create user
             const requestBody = { email, password, name, location, description, imageUrl }
             axios.post("/api/auth/signup", requestBody)
             .then(response => {
