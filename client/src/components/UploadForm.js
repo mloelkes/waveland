@@ -10,9 +10,9 @@ function UploadForm() {
     const [tag, setTag] = useState("");
     const [description, setDescription] = useState("");
     const [imageToUpload, setImageToUpload] = useState(undefined);
-    const [uploadImageLabel, setUploadImageLabel] = useState("Choose track image");
+    const [uploadImageLabel, setUploadImageLabel] = useState("Select image");
     const [trackToUpload, setTrackToUpload] = useState(undefined);
-    const [chooseTrackLabel, setChooseTrackLabel] = useState("Select track");
+    const [chooseTrackLabel, setChooseTrackLabel] = useState("Select Track");
     const [uploadTrackLabel, setUploadTrackLabel] = useState("Upload Track");
     const [trackUrl, setTrackUrl] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
@@ -22,6 +22,7 @@ function UploadForm() {
     // Upload track
     function handleUploadTrackButtonClick(e) {
         e.preventDefault();
+        setUploadTrackLabel("Uploading Track")
 
         const uploadTrackData = new FormData();
         uploadTrackData.append("trackUrl", trackToUpload);
@@ -29,8 +30,7 @@ function UploadForm() {
         axios.post("api/trackUpload", uploadTrackData)
         .then(response => {
             setTrackUrl(response.data.trackUrl);
-            setUploadTrackLabel("Track selected");
-            e.target.id = "upload-track-button-disabled";
+            setUploadTrackLabel("Track uploaded");
         })
         .catch(err => {
             const errorDescription = err.response.data.message;
@@ -61,7 +61,7 @@ function UploadForm() {
                 // Update user tracks
                 axios.patch(`api/users/${userDetails._id}/tracks`, requestBody)
                 .then(() => {
-                    // getUserDetails();
+                    getUserDetails();
                     navigate("/dashboard");
                 })
                 .catch(err => {
@@ -93,7 +93,6 @@ function UploadForm() {
     }
 
     function handleImageUploadButtonClick(e) {
-        e.target.id = "upload-image-button-disabled";
         document.getElementById("upload-image").click();
     }
     
@@ -104,7 +103,6 @@ function UploadForm() {
     }
 
     function handleChooseTrackButtonClick(e) {
-        e.target.id = "choose-track-button-disabled";
         document.getElementById("choose-track").click();
     }
     
@@ -123,15 +121,16 @@ function UploadForm() {
                 </span>
                 <span>
                     <input type="text" placeholder="Description" value={description} onChange={handleDescriptionChange}></input>
-                    <input type="button" id="upload-image-button" value={uploadImageLabel} onClick={(e) => handleImageUploadButtonClick(e)}/>
+                    <input id="upload-image-button" type="button" value={uploadImageLabel} onClick={(e) => handleImageUploadButtonClick(e)}/>
                     <input id="upload-image" type="file" onChange={(e) => handleImageToUploadChange(e)}></input>
                 </span>
-                <span>
+                <span id="upload-track-container">
                     <input type="button" id="choose-track-button" value={chooseTrackLabel} onClick={(e) => handleChooseTrackButtonClick(e)}/>
                     <input id="choose-track" type="file" onChange={(e) => handleTrackToUploadChange(e)}></input>
-                    <button className="upload-track-button" onClick={handleUploadTrackButtonClick}>{uploadTrackLabel}</button>
+                    
+                    <button id="upload-track-button" onClick={handleUploadTrackButtonClick}>{uploadTrackLabel}</button>
                 </span>
-                <button className="primary-button" type="submit">Upload Track</button>
+                <button className="primary-button" type="submit">Submit Track</button>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
         </div>
