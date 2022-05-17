@@ -5,7 +5,7 @@ function Dashboard() {
 	return (
         <div className="Dashboard">
             <UserDetails></UserDetails>
-            <Link to="/upload"><button className="primary-button">Upload a track</button></Link>
+            <Link to="/upload"><button className="primary-button">Upload Track</button></Link>
         </div>
 	)
 }

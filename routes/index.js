@@ -30,6 +30,31 @@ router.get("/users/:id", isAuthenticated, (req, res, next) => {
         .catch((err) => next(err));
 });
 
+// Get user by name
+router.get("/users", (req, res, next) => {
+    const name = req.query.name;
+
+    if (name === "") {
+        res.status(400).json({ message: "Please provide name" });
+        return;
+    }
+
+    User.findOne({name: name})
+        .populate("tracks")
+        .populate("likes")
+        .populate("following")
+        .populate("followers")
+        .then((user) => {
+            if (!user) {
+                res.status(400).json({ message: "User not found." });
+                return;
+            }
+
+            res.status(200).json(user);
+        })
+        .catch((err) => next(err));
+});
+
 // Update user tracks
 router.patch("/users/:id/tracks", (req, res, next) => {
     console.log("Update user tracks called", req.body);

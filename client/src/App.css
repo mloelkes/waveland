@@ -109,8 +109,19 @@ input:focus {
     margin: 0 60px;
 }
 
-.navigation-content span > .link {
+.navigation-content span > * {
     margin-left: 30px;
+}
+
+.navigation-content #user-logged-in-container {
+    display: flex;
+    align-items: center;
+}
+
+.navigation-content span #profile-picture {
+    margin-top: 5px;
+    width: 28px;
+    border-radius: 50%;
 }
 
 /* Homepage */
@@ -269,6 +280,93 @@ input:focus {
 #upload-track-container > * {
     width: 280px;
 }
+
+/* Profile Page */
+
+.Profile {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.Profile .col-1, .Profile .col-2, .Profile .col-3 {
+    margin: 60px 0 0 0;
+    flex: 1;
+}
+
+.track-details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.track-details #track-cover {
+    width: 160px;
+}
+
+.track-details button {
+    width: 160px;
+    height: 160px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+/* Audio Player */
+
+.Player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    position: fixed;
+    bottom: 0;
+    border-top: 2px solid var(--border);
+    background-color: var(--border);
+    color: white;
+}
+
+.player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-container > * {
+    margin: 0 10px;
+}
+
+.player-container p {
+    margin: 0 40px;
+    color: white;
+}
+
+.player-container #track-image {
+    width: 40px;
+}
+
+.player-container button {
+    width: 40px;
+    height: 40px;
+    border: none;
+}
+
+.player-container #player-play {
+    width: 28px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.player-container #player-mute {
+    width: 23px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+
+
 
 
 
