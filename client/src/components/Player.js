@@ -15,7 +15,7 @@ function Player (props) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [trackImage, setTrackImage] = useState("");
-    const [trackName, setTrackName] = useState("No Track loaded");
+    const [trackName, setTrackName] = useState("Please select a Track");
     const [trackUrl, setTrackUrl] = useState("");
 
     useEffect(() => {

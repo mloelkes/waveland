@@ -11,6 +11,7 @@
     --font-hover: rgb(125, 53, 218);
     --hover: rgb(125, 53, 218);
     --accent: rgb(125, 53, 218);
+    --accent-hover: rgb(145, 73, 238);
     --border: rgb(0, 0, 0);
     --primary-background: rgb(0, 0, 0);
     --primary-font: rgb(255, 255, 255);
@@ -121,6 +122,8 @@ input:focus {
 .navigation-content span #profile-picture {
     margin-top: 5px;
     width: 28px;
+    height: 28px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -365,7 +368,46 @@ input:focus {
     cursor: pointer;
 }
 
+/* ProfileDetails component */
 
+.ProfileDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProfileDetails #profile-picture {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.ProfileDetails .following-button {
+    width: 160px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+}
+
+.ProfileDetails .following {
+    background-color: var(--primary-background);
+    color: var(--primary-font);
+}
+
+.ProfileDetails .following:hover {
+    background-color: var(--accent);
+}
+
+.ProfileDetails .not-following {
+    background-color: var(--accent);
+    color: var(--primary-font)
+}
+
+.ProfileDetails .not-following:hover {
+    background-color: var(--accent-hover);
+}
 
 
 

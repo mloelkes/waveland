@@ -8,7 +8,7 @@ function UserDetailsContextProvider(props) {
 	const [isLoading, setIsLoading] = useState(true);
 
 	function getUserDetails () {
-		const storedToken = localStorage.getItem("authToken");
+		const storedToken = getStoredToken();
 
 		if (storedToken) {
 			return axios.get("/api/auth/verify", { headers: { Authorization: `Bearer ${storedToken}` } })
@@ -41,12 +41,16 @@ function UserDetailsContextProvider(props) {
         setUserDetails(null);
     }
 
+    function getStoredToken() {
+        return localStorage.getItem("authToken");
+    }
+
 	useEffect(() => {
 		getUserDetails();
 	}, [])
 
 	return (
-		<UserDetailsContext.Provider value={{ userDetails, getUserDetails, resetUserDetails }}>
+		<UserDetailsContext.Provider value={{ userDetails, getUserDetails, resetUserDetails, getStoredToken }}>
 			{props.children}
 		</UserDetailsContext.Provider>
 	)
