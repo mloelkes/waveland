@@ -8,23 +8,35 @@ function Profile (props) {
     const { name } = useParams();
 
     const [user, setUser] = useState(undefined);
+    const [tracks, setTracks] = useState(undefined);
 
-    function getUserDetails() {
+    function initializeData() {
         axios.get(`/api/users?name=${name}`)
         .then(response => {
             setUser(response.data);
+            getUserTracks(response.data._id);
         })
         .catch(err => {
             console.log(err);
         })
     }
 
-    function handlePlayTrack (trackUrl, trackImage, trackName) {
-        props.handlePlayTrack(trackUrl, trackImage, trackName);
+    function getUserTracks(id) {
+        axios.get(`/api/users/${id}/tracks`)
+        .then(response => {
+            setTracks(response.data);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    function handlePlayTrack (trackUrl, trackImage, trackName, artistName) {
+        props.handlePlayTrack(trackUrl, trackImage, trackName, artistName);
     }
 
     useEffect(() => {
-        getUserDetails();
+        initializeData();
     }, []);
     
     return (
@@ -33,7 +45,7 @@ function Profile (props) {
                 <ProfileDetails user={user}></ProfileDetails>
             </div>
             <div className="col-2">
-                <TrackList tracks={user?.tracks} handlePlayTrack={handlePlayTrack}></TrackList>
+                <TrackList page="profile" tracks={tracks} handlePlayTrack={handlePlayTrack}></TrackList>
             </div>
             <div className="col-3">
 

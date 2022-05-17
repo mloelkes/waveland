@@ -110,17 +110,21 @@ input:focus {
     margin: 0 60px;
 }
 
-.navigation-content span > * {
-    margin-left: 30px;
+.navigation-content #user-logged-in-dashboard-waves > * {
+    margin-right: 30px;
 }
 
-.navigation-content #user-logged-in-container {
+.navigation-content #user-logged-in-profile-logout {
     display: flex;
     align-items: center;
 }
 
+.navigation-content #user-logged-in-profile-logout > * {
+    margin-left: 30px;
+}
+
 .navigation-content span #profile-picture {
-    margin-top: 5px;
+    margin-top: 7px;
     width: 28px;
     height: 28px;
     object-fit: cover;
@@ -407,6 +411,15 @@ input:focus {
 
 .ProfileDetails .not-following:hover {
     background-color: var(--accent-hover);
+}
+
+/* Waves page */
+
+.Waves {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

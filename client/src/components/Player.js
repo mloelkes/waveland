@@ -15,7 +15,8 @@ function Player (props) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isMuted, setIsMuted] = useState(false);
     const [trackImage, setTrackImage] = useState("");
-    const [trackName, setTrackName] = useState("Please select a Track");
+    const [artistName, setArtistName] = useState("");
+    const [trackName, setTrackName] = useState("");
     const [trackUrl, setTrackUrl] = useState("");
 
     useEffect(() => {
@@ -28,6 +29,7 @@ function Player (props) {
 
     function handlePlayTrack() {
         setTrackImage(props.trackImage);
+        setArtistName(props.artistName);
         setTrackName(props.trackName);
         setTrackUrl(props.trackUrl);
 
@@ -60,7 +62,7 @@ function Player (props) {
 
                 <div className="player-container">
                     {trackImage && <img id="track-image" src={trackImage} alt="track cover"/>}
-                    {trackName && <p>{trackName}</p>}
+                    {trackName ? <p>{artistName} – {trackName}</p> : <p>Please select a Track</p>}
                     <button onClick={handlePlayPauseToggle}><img id="player-play" src={isPlaying ? pauseIcon : playIcon} alt="play-pause"/></button>
                     <button onClick={handleMuteToggle}><img id="player-mute" src={isMuted ? speakerMuteIcon : speakerIcon} alt="mute toggle"/></button>
                 </div>

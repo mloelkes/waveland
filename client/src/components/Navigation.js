@@ -16,15 +16,18 @@ function Navigation() {
         <div className="Navigation">
             <div className="navigation-content">
                 {isLoggedIn ?
-                    <Link className="font-accent" to="/dashboard">Waveland</Link> :
+                    <span id="user-logged-in-dashboard-waves">
+                        <Link className="font-accent" to="/dashboard">Waveland</Link>
+                        <Link className="font-accent" to="/waves">Waves</Link>
+                    </span> :
                     <Link className="font-accent" to="/">Waveland</Link>
                 }
                 {isLoggedIn ? 
-                <span id="user-logged-in-container">
-                    <Link to={`/${userDetails?.name}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
+                <span id="user-logged-in-profile-logout">
                     <Link className="link" to="/" onClick={handleLogoutClick}>Logout</Link>
+                    <Link to={`/${userDetails?.name}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
                 </span> :
-                <span>
+                <span id="user-logged-in-profile-logout">
                     <Link className="link" to="/login">Login</Link>
                     <Link className="link" to="/signup">Sign Up</Link>
                 </span>}

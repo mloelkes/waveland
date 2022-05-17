@@ -200,6 +200,60 @@ router.patch("/users/:id/tracks", (req, res, next) => {
     })
 })
 
+// Get user tracks
+router.get("/users/:id/tracks", (req, res, next) => {
+    const id = req.params.id;
+
+    if (id === "") {
+        res.status(400).json({
+            message: "Please provide user id."
+        });
+        return;
+    }
+
+    Track.find()
+    .populate("user")
+    .populate("comments")
+    .populate("likes")
+    .then(tracks => {
+        const filteredTracks = tracks.slice().filter(track => {
+            return String(track.user._id) === id;
+        })
+        
+        res.status(200).json(filteredTracks);
+    })
+    .catch(err => {
+        next(err);
+    })
+})
+
+// Get all tracks by users followed by specified user
+router.get("/users/:id/following/tracks", (req, res, next) => {
+    const id = req.params.id;
+  
+    if (id === "") {
+      res.status(400).json({ message: "Provide id" });
+      return;
+    }
+  
+    User.findById(id)
+    .then(user => {
+        Track.find()
+        .populate("user")
+        .populate("comments")
+        .populate("likes")
+        .then(tracks => {
+             const tracksByFollowedUsers = tracks.slice().filter(track => {
+                return user.following.includes(track.user._id);
+            });
+
+            res.status(200).json(tracksByFollowedUsers);
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => next(err));
+  });
+
 // Get track by ID
 router.get("/tracks/:id", (req, res, next) => {
   const id = req.params.id;
@@ -227,7 +281,7 @@ router.get("/tracks/:id", (req, res, next) => {
 // Create track
 router.post("/tracks", (req, res, next) => {
     console.log("Create track called", req.body);
-    const { name, tag, description, imageUrl, trackUrl } = req.body;
+    const { name, tag, description, imageUrl, trackUrl, user } = req.body;
 
     if (name === "" || trackUrl === "") {
         res.status(400).json({
@@ -243,10 +297,11 @@ router.post("/tracks", (req, res, next) => {
         description,
         imageUrl,
         trackUrl,
+        user
     })
     .then((createdTrack) => {
-        const { name, tag, description, imageUrl, trackUrl, _id } = createdTrack;
-        const track = { name, tag, description, imageUrl, trackUrl, _id };
+        const { name, tag, description, imageUrl, trackUrl, user, _id } = createdTrack;
+        const track = { name, tag, description, imageUrl, trackUrl, user, _id };
         res.status(201).json({ track: track });
     })
     .catch((err) => {

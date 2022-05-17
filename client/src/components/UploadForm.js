@@ -48,10 +48,11 @@ function UploadForm() {
         // Upload track image
         axios.post("api/imageUpload", uploadImageData)
         .then(response => {
+            const user = userDetails._id;
             const imageUrl = response.data.imageUrl;
 
             // Create track
-            const requestBody = { name, tag, description, imageUrl, trackUrl }
+            const requestBody = { name, tag, description, imageUrl, trackUrl, user }
             axios.post("/api/tracks", requestBody)
             .then((response) => {
                 let tracks = userDetails.tracks.slice();

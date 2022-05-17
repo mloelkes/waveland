@@ -11,7 +11,7 @@ function ProfileDetails(props) {
 
     useEffect(() => {
         userDetails?.following.forEach(followedUser => {
-            if (props.user._id === followedUser._id) {
+            if (props.user?._id === followedUser._id) {
                 setFollowing(true);
             }
         })
@@ -29,7 +29,7 @@ function ProfileDetails(props) {
 
     function followUser() {
         let followingFormData = {
-            followedUserId: props.user._id
+            followedUserId: props.user?._id
         };
 
         // Update following user
@@ -40,7 +40,7 @@ function ProfileDetails(props) {
             };
 
             // Update followed user
-            axios.patch(`api/users/${props.user._id}/followers`, followersFormData)
+            axios.patch(`api/users/${props.user?._id}/followers`, followersFormData)
             .then(response => {
                 setFollowing(true);
             })
@@ -57,7 +57,7 @@ function ProfileDetails(props) {
 
     function unfollowUser() {
         let followingFormData = {
-            followedUserId: props.user._id
+            followedUserId: props.user?._id
         };
 
         axios.patch(`api/users/${userDetails._id}/following/delete`, followingFormData)
@@ -66,7 +66,7 @@ function ProfileDetails(props) {
                 followingUserId: userDetails._id
             };
     
-            axios.patch(`api/users/${props.user._id}/followers/delete`, followedFormData)
+            axios.patch(`api/users/${props.user?._id}/followers/delete`, followedFormData)
             .then(response => {
                 setFollowing(false);
             })
