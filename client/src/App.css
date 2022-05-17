@@ -320,6 +320,31 @@ input:focus {
     cursor: pointer;
 }
 
+/* Followers component */
+
+.Followers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Followers #follower-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Following component */
+
+.Following #followed-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 /* Audio Player */
 
 .Player {

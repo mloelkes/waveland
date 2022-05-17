@@ -1,7 +1,6 @@
 function TrackList (props) {
    
     function handleTrackDetailsClick(e) {
-        console.log(e.target.parentNode.attributes);
         const trackUrl = e.target.parentNode.attributes.trackurl.value;
         const trackImage = e.target.parentNode.attributes.trackimage.value;
         const trackName = e.target.parentNode.attributes.trackname.value;

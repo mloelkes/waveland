@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ProfileDetails from "../components/ProfileDetails.js";
 import TrackList from "../components/TrackList.js";
+import Followers from "../components/Followers.js";
+import Following from "../components/Following.js";
 
 function Profile (props) {
     const { name } = useParams();
@@ -13,6 +15,7 @@ function Profile (props) {
     function initializeData() {
         axios.get(`/api/users?name=${name}`)
         .then(response => {
+            console.log(response.data.followers);
             setUser(response.data);
             getUserTracks(response.data._id);
         })
@@ -48,7 +51,8 @@ function Profile (props) {
                 <TrackList page="profile" tracks={tracks} handlePlayTrack={handlePlayTrack}></TrackList>
             </div>
             <div className="col-3">
-
+                <Followers user={user}></Followers>
+                <Following user={user}></Following>
             </div>
         </div>
     )
