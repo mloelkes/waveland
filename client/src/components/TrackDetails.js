@@ -60,7 +60,6 @@ function TrackDetails(props) {
 
         axios.patch(route, likesFormData)
         .then(response => {
-            console.log(response);
         })
         .catch(err => {
             const errorDescription = err.response.data.message;

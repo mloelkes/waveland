@@ -16,7 +16,6 @@ function Profile (props) {
     function initializeData() {
         axios.get(`/api/users?name=${name}`)
         .then(response => {
-            console.log("LIKES: ", response.data.likes[0].user);
             setUser(response.data);
             getUserTracks(response.data._id);
         })
