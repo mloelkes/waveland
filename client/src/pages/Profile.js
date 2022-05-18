@@ -16,7 +16,7 @@ function Profile (props) {
     function initializeData() {
         axios.get(`/api/users?name=${name}`)
         .then(response => {
-            console.log(response.data);
+            console.log("LIKES: ", response.data.likes[0].user);
             setUser(response.data);
             getUserTracks(response.data._id);
         })
@@ -54,7 +54,7 @@ function Profile (props) {
             <div className="col-3">
                 <Followers user={user}></Followers>
                 <Following user={user}></Following>
-                <Likes tracks={user?.likes}></Likes>
+                <Likes tracks={user?.likes} handlePlayTrack={handlePlayTrack}></Likes>
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ const trackUploader = require("../config/cloudinary.tracks.config");
 const { default: mongoose } = require("mongoose");
 
 // Get user by ID
-router.get("/users/:id", isAuthenticated, (req, res, next) => {
+router.get("/users/:id", (req, res, next) => {
     const id = req.params.id;
 
     if (id === "") {
