@@ -301,23 +301,30 @@ input:focus {
     flex: 1;
 }
 
-.track-details {
+.TrackDetails {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.track-details #track-cover {
+.TrackDetails #track-cover {
     width: 160px;
 }
 
-.track-details button {
+.TrackDetails button {
     width: 160px;
     height: 160px;
     margin: 0;
     padding: 0;
     border: none;
     cursor: pointer;
+}
+
+.TrackDetails #artist-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 /* Followers component */

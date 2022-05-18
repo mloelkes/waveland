@@ -33,8 +33,8 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/upload" element={<Upload />} />
-                <Route path="/:name" element={<Profile handlePlayTrack={handlePlayTrack}/>} />
                 <Route path="/waves" element={<Waves handlePlayTrack={handlePlayTrack}/>} />
+                <Route path="/:name" element={<Profile handlePlayTrack={handlePlayTrack}/>} />
             </Routes>
             <Player trackUrl={trackUrl} trackImage={trackImage} trackName={trackName} artistName={artistName}></Player>
         </div>

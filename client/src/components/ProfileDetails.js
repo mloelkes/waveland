@@ -15,7 +15,7 @@ function ProfileDetails(props) {
                 setFollowing(true);
             }
         })
-    }, [userDetails])
+    }, [userDetails, props.user])
 
     function handleFollowClick(e) {
         e.preventDefault();

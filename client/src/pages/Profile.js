@@ -5,6 +5,7 @@ import ProfileDetails from "../components/ProfileDetails.js";
 import TrackList from "../components/TrackList.js";
 import Followers from "../components/Followers.js";
 import Following from "../components/Following.js";
+import Likes from "../components/Likes.js";
 
 function Profile (props) {
     const { name } = useParams();
@@ -15,7 +16,7 @@ function Profile (props) {
     function initializeData() {
         axios.get(`/api/users?name=${name}`)
         .then(response => {
-            console.log(response.data.followers);
+            console.log(response.data);
             setUser(response.data);
             getUserTracks(response.data._id);
         })
@@ -40,7 +41,7 @@ function Profile (props) {
 
     useEffect(() => {
         initializeData();
-    }, []);
+    }, [name]);
     
     return (
         <div className="Profile">
@@ -53,6 +54,7 @@ function Profile (props) {
             <div className="col-3">
                 <Followers user={user}></Followers>
                 <Following user={user}></Following>
+                <Likes tracks={user?.likes}></Likes>
             </div>
         </div>
     )

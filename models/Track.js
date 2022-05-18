@@ -23,12 +23,6 @@ const trackSchema = new Schema(
         description: String,
       },
     ],
-    likes: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
   },
   {
     timestamps: true,

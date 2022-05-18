@@ -46,6 +46,7 @@ router.get("/users", (req, res, next) => {
         .populate("following")
         .populate("followers")
         .then((user) => {
+            console.log(user);
             if (!user) {
                 res.status(400).json({ message: "User not found." });
                 return;
@@ -54,6 +55,71 @@ router.get("/users", (req, res, next) => {
             res.status(200).json(user);
         })
         .catch((err) => next(err));
+});
+
+// Add like to user array
+router.patch("/users/:id/likes", (req, res, next) => {
+    const userId = req.params.id;
+    const { trackId } = req.body;
+
+    if (userId === "" || trackId === undefined) {
+        res.status(400).json({
+            message: "Please provide user and trackId."
+        });
+        return;
+    }
+
+    User.findById(userId)
+    .then(user => {
+        const trackIdObjectId = mongoose.Types.ObjectId(trackId)
+
+        if (user.likes.includes(trackIdObjectId)) {
+            res.status(200);
+            return;
+        }
+
+        user.likes.push(trackIdObjectId);
+
+        User.findByIdAndUpdate(userId, user)
+        .then(response => {
+            res.status(200).json(response.data);
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => next(err));
+});
+
+// Remove like from user array
+router.patch("/users/:id/likes/remove", (req, res, next) => {
+    const userId = req.params.id;
+    const { trackId } = req.body;
+
+    if (userId === "" || trackId === undefined) {
+        res.status(400).json({
+            message: "Please provide user and trackId."
+        });
+        return;
+    }
+
+    User.findById(userId)
+    .then(user => {
+        const trackIdObjectId = mongoose.Types.ObjectId(trackId)
+
+        if (!user.likes.includes(trackIdObjectId)) {
+            res.status(200);
+            return;
+        }
+
+        const index = user.likes.indexOf(trackIdObjectId)
+        user.likes.splice(index, 1);
+
+        User.findByIdAndUpdate(userId, user)
+        .then(response => {
+            res.status(200).json(response.data);
+        })
+        .catch((err) => next(err));
+    })
+    .catch((err) => next(err));
 });
 
 // Update user following
@@ -214,7 +280,6 @@ router.get("/users/:id/tracks", (req, res, next) => {
     Track.find()
     .populate("user")
     .populate("comments")
-    .populate("likes")
     .then(tracks => {
         const filteredTracks = tracks.slice().filter(track => {
             return String(track.user._id) === id;
@@ -241,7 +306,6 @@ router.get("/users/:id/following/tracks", (req, res, next) => {
         Track.find()
         .populate("user")
         .populate("comments")
-        .populate("likes")
         .then(tracks => {
              const tracksByFollowedUsers = tracks.slice().filter(track => {
                 return user.following.includes(track.user._id);
