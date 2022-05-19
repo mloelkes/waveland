@@ -8,7 +8,7 @@ const imageUploader = require("../config/cloudinary.images.config");
 // User signup
 router.post("/signup", (req, res, next) => {
     console.log("signup called", req.body);
-    const { email, password, name, location, description, imageUrl } = req.body;
+    const { email, password, name, nameForUrl, location, description, imageUrl } = req.body;
 
     if (email === "" || password === "" || name === "") {
         res.status(400).json({
@@ -39,8 +39,8 @@ router.post("/signup", (req, res, next) => {
             imageUrl
         })
             .then((createdUser) => {
-                const { email, name, location, description, imageUrl, _id } = createdUser;
-                const user = { email, name, location, description, imageUrl, _id };
+                const { email, name, nameForUrl, location, description, imageUrl, _id } = createdUser;
+                const user = { email, name, nameForUrl, location, description, imageUrl, _id };
                 res.status(201).json({ user: user });
             })
             .catch((err) => {

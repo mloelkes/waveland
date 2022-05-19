@@ -11,6 +11,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    nameForUrl: String,
     imageUrl: String,
     location: String,
     description: String,

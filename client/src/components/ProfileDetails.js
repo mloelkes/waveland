@@ -83,7 +83,7 @@ function ProfileDetails(props) {
 
     return (
         <div className="ProfileDetails">
-        <Link to={`/${props.user?.name}`} ><img id="profile-picture" src={props.user?.imageUrl} alt="user profile"/></Link>
+        <Link to={`/${props.user?.nameForUrl}`} ><img id="profile-picture" src={props.user?.imageUrl} alt="user profile"/></Link>
             <p>{props.user?.name}</p>
             <p>{props.user?.description}</p>
             <p>{props.user?.location}</p>

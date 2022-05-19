@@ -25,7 +25,7 @@ function Navigation() {
                 {isLoggedIn ? 
                 <span id="user-logged-in-profile-logout">
                     <Link className="link" to="/" onClick={handleLogoutClick}>Logout</Link>
-                    <Link to={`/${userDetails?.name}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
+                    <Link to={`/${userDetails?.nameForUrl}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
                 </span> :
                 <span id="user-logged-in-profile-logout">
                     <Link className="link" to="/login">Login</Link>

@@ -7,7 +7,7 @@ function UserDetails() {
 
     return (
         <div className="UserDetails">
-        <Link to={`/${userDetails?.name}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
+        <Link to={`/${userDetails?.nameForUrl}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
             <p>Username: {userDetails?.name}</p>
             <p>E-Mail: {userDetails?.email}</p>
             <p>Description: {userDetails?.description}</p>

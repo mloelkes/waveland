@@ -5,7 +5,7 @@ function Following(props) {
         <div className="Following">
         <h1>FOLLOWING</h1>
         {props.user?.following.map(followed => (
-            <Link key={followed._id} to={`/${followed?.name}`} className="followed">
+            <Link key={followed._id} to={`/${followed?.nameForUrl}`} className="followed">
                 <img id="followed-image" src={followed?.imageUrl} alt="followed"/>
                 <p>{followed?.name}</p>
                 <p>{followed?.tracks.length}</p>

@@ -83,7 +83,7 @@ function TrackDetails(props) {
             {window.location.href.includes("waves") && 
             <>
                 <p>{props.track?.user.name}</p>
-                <Link to={`/${props.track?.user?.name}`} ><img id="artist-image" src={props.track?.user?.imageUrl} alt="artist"/></Link>
+                <Link to={`/${props.track?.user?.nameForUrl}`} ><img id="artist-image" src={props.track?.user?.imageUrl} alt="artist"/></Link>
             </>
             }
             {!(props.track?.user?._id === user._id) && <button onClick={handleLikeButtonClick}><img src={trackLiked ? heartFilledUrl : heartOutlinedUrl}/></button>}

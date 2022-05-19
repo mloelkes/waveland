@@ -31,16 +31,16 @@ router.get("/users/:id", (req, res, next) => {
         .catch((err) => next(err));
 });
 
-// Get user by name
+// Get user by nameForUrl
 router.get("/users", (req, res, next) => {
-    const name = req.query.name;
+    const nameForUrl = req.query.nameForUrl;
 
-    if (name === "") {
-        res.status(400).json({ message: "Please provide name" });
+    if (nameForUrl === "") {
+        res.status(400).json({ message: "Please provide nameForUrl" });
         return;
     }
 
-    User.findOne({name: name})
+    User.findOne({nameForUrl: nameForUrl})
         .populate("tracks")
         .populate("likes")
         .populate("following")

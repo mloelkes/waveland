@@ -8,13 +8,13 @@ import Following from "../components/Following.js";
 import Likes from "../components/Likes.js";
 
 function Profile (props) {
-    const { name } = useParams();
+    const { nameForUrl } = useParams();
 
     const [user, setUser] = useState(undefined);
     const [tracks, setTracks] = useState(undefined);
 
     function initializeData() {
-        axios.get(`/api/users?name=${name}`)
+        axios.get(`/api/users?nameForUrl=${nameForUrl}`)
         .then(response => {
             setUser(response.data);
             getUserTracks(response.data._id);
@@ -40,7 +40,7 @@ function Profile (props) {
 
     useEffect(() => {
         initializeData();
-    }, [name]);
+    }, [nameForUrl]);
     
     return (
         <div className="Profile">

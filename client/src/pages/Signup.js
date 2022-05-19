@@ -6,6 +6,7 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const [nameForUrl, setNameForUrl] = useState("");
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
     const [imageToUpload, setImageToUpload] = useState(undefined);
@@ -45,13 +46,14 @@ function Signup() {
         .then(response => {
             const imageUrl = response.data.imageUrl;
 
+            const nameForUrl = name.toLowerCase().split(" ").join("");
             const tracks = [];
             const followers = [];
             const following = [];
             const likes = [];
 
             // Create user
-            const requestBody = { email, password, name, location, description, imageUrl, tracks, followers, following, likes }
+            const requestBody = { email, password, name, nameForUrl, location, description, imageUrl, tracks, followers, following, likes }
             axios.post("/api/auth/signup", requestBody)
             .then(() => {
                 navigate("/login");

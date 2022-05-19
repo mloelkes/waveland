@@ -32,7 +32,10 @@ function Waves(props) {
 
     return (
         <div className="Waves">
-            <TrackList page="waves" tracks={tracks} handlePlayTrack={handlePlayTrack}></TrackList>
+            {tracks.length > 0 ?
+            <TrackList page="waves" tracks={tracks} handlePlayTrack={handlePlayTrack}></TrackList> :
+            <p>No Tracks to display.</p>
+            }
         </div>
     )
 }
