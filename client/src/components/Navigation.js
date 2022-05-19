@@ -17,13 +17,14 @@ function Navigation() {
             <div className="navigation-content">
                 {isLoggedIn ?
                     <span id="user-logged-in-dashboard-waves">
-                        <Link className="font-accent" to="/dashboard">Waveland</Link>
-                        <Link className="font-accent" to="/waves">Waves</Link>
+                        <Link className="font-accent" to="/dashboard"><img id="logo" src="/images/icons/7a.png" alt="waveland logo"/></Link>
+                        
                     </span> :
                     <Link className="font-accent" to="/">Waveland</Link>
                 }
                 {isLoggedIn ? 
                 <span id="user-logged-in-profile-logout">
+                    <Link className="font-accent" to="/waves">Waves</Link>
                     <Link className="link" to="/" onClick={handleLogoutClick}>Logout</Link>
                     <Link to={`/${userDetails?.nameForUrl}`} ><img id="profile-picture" src={userDetails?.imageUrl} alt="user profile"/></Link>
                 </span> :
