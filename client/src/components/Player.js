@@ -62,7 +62,7 @@ function Player (props) {
 
                 <div className="player-container">
                     {trackImage && <img id="track-image" src={trackImage} alt="track cover"/>}
-                    {trackName ? <p>{artistName} – {trackName}</p> : <p>Please select a Track</p>}
+                    {trackName ? <p>{artistName} – {trackName}</p> : <p>Please select a Wave</p>}
                     <button onClick={handlePlayPauseToggle}><img id="player-play" src={isPlaying ? pauseIcon : playIcon} alt="play-pause"/></button>
                     <button onClick={handleMuteToggle}><img id="player-mute" src={isMuted ? speakerMuteIcon : speakerIcon} alt="mute toggle"/></button>
                 </div>

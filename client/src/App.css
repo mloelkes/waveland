@@ -157,7 +157,8 @@ input:focus {
 .Home h1 {
     font-size: 120px;
     line-height: 1.3;
-    color: var(--accent);
+    color: var(--font);
+    font-weight: 600;
 }
 
 /* Sign Up page */
@@ -223,12 +224,40 @@ input:focus {
 .Dashboard {
     height: 100vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;    
-    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
     background-position: center;
     background-size: cover;
+    overflow: hidden;
+}
+
+.Dashboard .col-1 {
+    flex: 2;
+    margin: 120px 30px 120px 60px;
+    border-radius: 10px;
+    background-color: var(--accent);
+}
+
+.Dashboard .col-2 {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin: 120px 60px 120px 30px;
+    background-color: var(--primary-background);
+}
+
+.Dashboard .col-2:hover {
+    background-color: var(--accent);
+}
+
+.Dashboard #link {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-font);
 }
 
 /* UserDetails Component */
@@ -237,7 +266,7 @@ input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 60px;
 }
 
 .UserDetails #profile-picture {
@@ -245,6 +274,23 @@ input:focus {
     height: 140px;
     object-fit: cover;
     border-radius: 50%;
+    margin: 0 0 20px 0;
+}
+
+.UserDetails span {
+    display: flex;
+    align-items: center;
+}
+
+.UserDetails .label {
+    font-size: 12px;
+    font-weight: bold;
+    margin: 10px 0 4px 0;
+}
+
+.UserDetails p {
+    font-size: 16px;
+    color: var(--primary-font);
 }
 
 /* Track upload page */
@@ -285,13 +331,16 @@ input:focus {
 }
 
 #upload-track-container {
-    border: 2px solid var(--background-dark);
+    /* border: 2px solid var(--border); */
+    background-color: var(--accent);
     border-radius: 10px;
     width: 640px;
 }
 
 #upload-track-container > * {
     width: 280px;
+    color: var(--primary-font);
+    border: 2px solid var(--primary-font);
 }
 
 /* Profile Page */

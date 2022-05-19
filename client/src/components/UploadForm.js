@@ -12,8 +12,8 @@ function UploadForm() {
     const [imageToUpload, setImageToUpload] = useState(undefined);
     const [uploadImageLabel, setUploadImageLabel] = useState("Select image");
     const [trackToUpload, setTrackToUpload] = useState(undefined);
-    const [chooseTrackLabel, setChooseTrackLabel] = useState("Select Track");
-    const [uploadTrackLabel, setUploadTrackLabel] = useState("Upload Track");
+    const [chooseTrackLabel, setChooseTrackLabel] = useState("Select Wave");
+    const [uploadTrackLabel, setUploadTrackLabel] = useState("Upload Wave");
     const [trackUrl, setTrackUrl] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -22,7 +22,7 @@ function UploadForm() {
     // Upload track
     function handleUploadTrackButtonClick(e) {
         e.preventDefault();
-        setUploadTrackLabel("Uploading Track")
+        setUploadTrackLabel("Uploading Wave")
 
         const uploadTrackData = new FormData();
         uploadTrackData.append("trackUrl", trackToUpload);
@@ -30,7 +30,7 @@ function UploadForm() {
         axios.post("api/trackUpload", uploadTrackData)
         .then(response => {
             setTrackUrl(response.data.trackUrl);
-            setUploadTrackLabel("Track uploaded");
+            setUploadTrackLabel("Wave uploaded");
         })
         .catch(err => {
             const errorDescription = err.response.data.message;
@@ -131,7 +131,7 @@ function UploadForm() {
                     
                     <button id="upload-track-button" onClick={handleUploadTrackButtonClick}>{uploadTrackLabel}</button>
                 </span>
-                <button className="primary-button" type="submit">Submit Track</button>
+                <button className="primary-button" type="submit">Submit Wave</button>
             </form>
             {errorMessage && <p>{errorMessage}</p>}
         </div>

@@ -4,8 +4,13 @@ import UserDetails from "../components/UserDetails.js";
 function Dashboard() {
 	return (
         <div className="Dashboard">
-            <UserDetails></UserDetails>
-            <Link to="/upload"><button className="primary-button">Upload Track</button></Link>
+            <div className="col-1">
+                <UserDetails></UserDetails>
+            </div>
+            <div className="col-2">
+                <Link id="link" to="/upload">Upload Waves</Link>
+            </div>
+
         </div>
 	)
 }
