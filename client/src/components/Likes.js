@@ -19,10 +19,12 @@ function Likes(props) {
 
     return (
         <div className="Likes">
-            <h1>Likes</h1>
-            {props.tracks?.map(track => (
-                <button key={track._id} onClick={handlePlayTrack} trackurl={track?.trackUrl} trackimage={track?.imageUrl} trackname={track?.name} userid={track?.user} ><img id="track-cover" src={track?.imageUrl} alt="track cover"/></button>
-            ))}
+            <p className="headline">Likes</p>
+                <div className="likes-content">
+                {props.tracks?.map(track => (
+                    <button key={track._id} onClick={handlePlayTrack} trackurl={track?.trackUrl} trackimage={track?.imageUrl} trackname={track?.name} userid={track?.user} ><img id="track-cover" src={track?.imageUrl} alt="track cover"/></button>
+                ))}
+            </div>
         </div>
     )
 }

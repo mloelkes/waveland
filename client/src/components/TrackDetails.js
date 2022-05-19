@@ -69,25 +69,29 @@ function TrackDetails(props) {
 
     return (
         <div className="TrackDetails">
-        <div className="col-1">
-            <button trackurl={props.track?.trackUrl} trackimage={props.track?.imageUrl} trackname={props.track?.name} artistname={props.track?.user?.name} onClick={handleTrackDetailsClick}>
-                <img id="track-cover" src={props.track?.imageUrl} alt="track cover"/>
-            </button>
-        </div>
-        <div className="col-2">
-            <p>{props.track?.name}</p>
-            <p>{props.track?.tag}</p>
-            <p>{props.track?.description}</p>
-        </div>
-        <div className="col-3">
-            {window.location.href.includes("waves") && 
-            <>
-                <p>{props.track?.user.name}</p>
-                <Link to={`/${props.track?.user?.nameForUrl}`} ><img id="artist-image" src={props.track?.user?.imageUrl} alt="artist"/></Link>
-            </>
-            }
-            {!(props.track?.user?._id === user._id) && <button onClick={handleLikeButtonClick}><img src={trackLiked ? heartFilledUrl : heartOutlinedUrl}/></button>}
-        </div>
+            <div className="col-1">
+                <div className="col-1">
+                    <button trackurl={props.track?.trackUrl} trackimage={props.track?.imageUrl} trackname={props.track?.name} artistname={props.track?.user?.name} onClick={handleTrackDetailsClick}>
+                        <img id="track-cover" src={props.track?.imageUrl} alt="track cover"/>
+                    </button>
+                </div>
+                <div className="col-2">
+                    {props.track.name && <p className="label">TITLE</p>}
+                    <p className="content">{props.track?.name}</p>
+                    {props.track.tag && <p className="label">TAG</p>}
+                    <p className="content">{props.track?.tag}</p>
+                    {props.track.description && <p className="label">DESCRIPTION</p>}
+                    <p className="content">{props.track?.description}</p>
+                    {!(props.track?.user?._id === user._id) && <button id="like-button" onClick={handleLikeButtonClick}><img id="like-button-img" src={trackLiked ? heartFilledUrl : heartOutlinedUrl} alt="like-button"/></button>}
+                </div>
+            </div>
+            <div className="col-2">
+                {window.location.href.includes("waves") && 
+                <>
+                    <Link to={`/${props.track?.user?.nameForUrl}`} ><img id="artist-image" src={props.track?.user?.imageUrl} alt="artist"/></Link>
+                </>
+                }
+            </div>
     </div>
     )
 }

@@ -83,11 +83,14 @@ function ProfileDetails(props) {
 
     return (
         <div className="ProfileDetails">
-        <Link to={`/${props.user?.nameForUrl}`} ><img id="profile-picture" src={props.user?.imageUrl} alt="user profile"/></Link>
-            <p>{props.user?.name}</p>
+            <Link to={`/${props.user?.nameForUrl}`} ><img id="profile-picture" src={props.user?.imageUrl} alt="user profile"/></Link>
+            <p id="profile-details-name">{props.user?.name}</p>
             <p>{props.user?.description}</p>
             <p>{props.user?.location}</p>
-            {!(userDetails?._id === props.user?._id) && <button className={following ? "following-button following" : "following-button not-following"} onClick={handleFollowClick}>{following ? "Following" : "Follow"}</button>}
+            <div className="follow-button-container">
+                {!(userDetails?._id === props.user?._id) && <button className={following ? "following-button following" : "following-button not-following"} onClick={handleFollowClick}>{following ? "Following" : "Follow"}</button>}
+            </div>
+
         </div>
     )
 }

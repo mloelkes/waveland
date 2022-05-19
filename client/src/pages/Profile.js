@@ -45,7 +45,9 @@ function Profile (props) {
     return (
         <div className="Profile">
             <div className="col-1">
-                <ProfileDetails user={user}></ProfileDetails>
+                <div className="profile-details-container">
+                    <ProfileDetails user={user}></ProfileDetails>
+                </div>
             </div>
             <div className="col-2">
                 <TrackList page="profile" tracks={tracks} handlePlayTrack={handlePlayTrack}></TrackList>
@@ -53,7 +55,7 @@ function Profile (props) {
             <div className="col-3">
                 <Followers user={user}></Followers>
                 <Following user={user}></Following>
-                <Likes tracks={user?.likes} handlePlayTrack={handlePlayTrack}></Likes>
+                {user?.likes?.length > 0 && <Likes tracks={user?.likes} handlePlayTrack={handlePlayTrack}></Likes>}
             </div>
         </div>
     )

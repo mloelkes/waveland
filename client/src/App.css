@@ -225,9 +225,6 @@ input:focus {
     height: 100vh;
     display: flex;
     justify-content: center;
-    background-position: center;
-    background-size: cover;
-    overflow: hidden;
 }
 
 .Dashboard .col-1 {
@@ -235,6 +232,7 @@ input:focus {
     margin: 120px 30px 120px 60px;
     border-radius: 10px;
     background-color: var(--accent);
+    border: 2px solid var(--accent);
 }
 
 .Dashboard .col-2 {
@@ -244,19 +242,23 @@ input:focus {
     align-items: center;
     border-radius: 10px;
     margin: 120px 60px 120px 30px;
-    background-color: var(--primary-background);
+    border: 2px solid var(--border);
 }
 
 .Dashboard .col-2:hover {
     background-color: var(--accent);
+    border: 2px solid var(--accent);
 }
 
-.Dashboard #link {
+.Dashboard .col-2 #link {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.Dashboard .col-2 #link:hover {
     color: var(--primary-font);
 }
 
@@ -331,7 +333,6 @@ input:focus {
 }
 
 #upload-track-container {
-    /* border: 2px solid var(--border); */
     background-color: var(--accent);
     border-radius: 10px;
     width: 640px;
@@ -349,6 +350,39 @@ input:focus {
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.Profile > .col-1 {
+    flex: 1;
+    margin: 120px 30px 120px 60px;
+}
+
+.Profile > .col-1 .profile-details-container {
+    position: fixed;
+    border-radius: 10px;
+    border: 2px solid var(--accent);
+    background-color: var(--accent);
+} 
+
+.Profile > .col-2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 120px 30px 120px 30px;
+}
+
+.Profile > .col-3 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 10px;
+    margin: 120px 60px 120px 30px;
 }
 
 .Profile > * {
@@ -356,53 +390,180 @@ input:focus {
     flex: 1;
 }
 
+
+/* ProfileDetails component */
+
+.ProfileDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 60px 60px 60px;
+}
+
+.ProfileDetails #profile-picture {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 0 30px 0;
+}
+
+.ProfileDetails #profile-details-name {
+    font-family: 'Vollkorn', serif;
+    font-size: 24px;
+    padding: 0 0 10px 0;
+}
+
+.ProfileDetails p {
+    text-align: center;
+    max-width: 240px;
+    padding: 0 0 4px 0;
+    color: var(--primary-font);
+    font-size: 14px;
+}
+
+.ProfileDetails .following-button {
+    width: 160px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    margin: 26px 0 0 0;
+}
+
+.ProfileDetails .following {
+    border: 2px solid var(--primary-font);
+    color: var(--primary-font);
+}
+
+.ProfileDetails .following:hover {
+    background-color: var(--accent-hover);
+    border: 2px solid var(--primary-font);
+}
+
+.ProfileDetails .not-following {
+    background-color: var(--primary-background);
+    border: 2px solid var(--border);
+    color: var(--primary-font)
+}
+
+.ProfileDetails .not-following:hover {
+    background-color: var(--accent);
+    border: 2px solid var(--primary-font);
+}
+
+/* TrackList component */
+
+.TrackList > * {
+    margin: 0 0 30px 0;
+}
+
+/* TrackDetails component */
+
 .TrackDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.TrackDetails > .col-1 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding: 0 30px;
+}
+
+.TrackDetails > .col-1 > .col-2 .label {
+    font-weight: bold;
+    font-size: 12px;
+    margin: 0 0 2px 0;
+}
+
+.TrackDetails > .col-1 > .col-2 .content {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+}
+
+.TrackDetails > .col-1 > .col-2 #like-button {
+    width: 24px;
+    height: 24px;
+}
+
+#like-button-img {
+    width: 24px;
 }
 
 .TrackDetails #track-cover {
     width: 160px;
+    border-radius: 10px;
 }
 
 .TrackDetails button {
     width: 160px;
     height: 160px;
-    margin: 0;
+    margin: 0 30px 0 0;
     padding: 0;
     border: none;
     cursor: pointer;
 }
 
 .TrackDetails #artist-image {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-/* Followers component */
+/* Followers, Following, Likes components */
 
-.Followers {
+.Followers, .Following, .Likes {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.Followers #follower-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
+.Followers .headline, .Following .headline, .Likes .headline {
+    font-family: 'Vollkorn', serif;
+    font-size: 24px;
+    margin: 0 0 30px 0;
 }
 
-/* Following component */
+.Followers .followers-content, .Following .following-content, .Likes .likes-content {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 20px 20px 0;
+    margin: 0 0 30px 0;
+    /* border: 2px solid var(--border); */
+    background-color: var(--accent);
+    border-radius: 10px;
+}
 
-.Following #followed-image {
-    width: 100px;
-    height: 100px;
+.Followers .follower, .Following .followed {
+    margin: 5px 30px;
+}
+
+.Likes .likes-content button {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 5px 30px 5px 15px;
+}
+
+.Likes .likes-content #track-cover {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.Followers #follower-image, .Following #followed-image {
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -439,6 +600,7 @@ input:focus {
 
 .player-container #track-image {
     width: 40px;
+    border-radius: 50%;
 }
 
 .player-container button {
@@ -459,80 +621,23 @@ input:focus {
     cursor: pointer;
 }
 
-/* ProfileDetails component */
-
-.ProfileDetails {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.ProfileDetails #profile-picture {
-    width: 160px;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.ProfileDetails .following-button {
-    width: 160px;
-    height: 40px;
-    border: none;
-    cursor: pointer;
-}
-
-.ProfileDetails .following {
-    background-color: var(--primary-background);
-    color: var(--primary-font);
-}
-
-.ProfileDetails .following:hover {
-    background-color: var(--accent);
-}
-
-.ProfileDetails .not-following {
-    background-color: var(--accent);
-    color: var(--primary-font)
-}
-
-.ProfileDetails .not-following:hover {
-    background-color: var(--accent-hover);
-}
-
 /* Waves page */
 
 .Waves {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 120px 0 80px 0;
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-/* Likes component */
 
-.Likes {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
-.Likes button {
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-    border-radius: 0;
-    border: none;
-}
 
-.Likes #track-cover {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-}
 
 
 
