@@ -351,7 +351,7 @@ input:focus {
     justify-content: center;
 }
 
-.Profile .col-1, .Profile .col-2, .Profile .col-3 {
+.Profile > * {
     margin: 60px 0 0 0;
     flex: 1;
 }
