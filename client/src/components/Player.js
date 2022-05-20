@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { AuthContext } from "../context/auth.js";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Player (props) {
     const playIcon = "/images/icons/baseline_play_arrow_white_48dp.png";
@@ -18,6 +20,8 @@ function Player (props) {
     const [artistName, setArtistName] = useState("");
     const [trackName, setTrackName] = useState("");
     const [trackUrl, setTrackUrl] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (isInitialMount.current) {
@@ -53,6 +57,15 @@ function Player (props) {
         setIsMuted(!isMuted);
     }
 
+    function handleRandomButtonClick() {
+        axios.get("/api/users/all")
+        .then(response => {
+            const users = response.data;
+            const random = Math.floor(Math.random() * users.length);
+            navigate(`/${users[random].nameForUrl}`);
+        })
+    };
+
     return (
         <>
             {isLoggedIn &&
@@ -66,7 +79,7 @@ function Player (props) {
                     <button onClick={handlePlayPauseToggle}><img id="player-play" src={isPlaying ? pauseIcon : playIcon} alt="play-pause"/></button>
                     <button onClick={handleMuteToggle}><img id="player-mute" src={isMuted ? speakerMuteIcon : speakerIcon} alt="mute toggle"/></button>
                 </div>
-
+                <div onClick={handleRandomButtonClick} id="random-button"></div>
             </div>
             }
         </>

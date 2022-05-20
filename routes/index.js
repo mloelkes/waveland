@@ -6,6 +6,20 @@ const imageUploader = require("../config/cloudinary.images.config");
 const trackUploader = require("../config/cloudinary.tracks.config");
 const { default: mongoose } = require("mongoose");
 
+// Get all users
+router.get("/users/all", (req, res, next) => {
+    User.find()
+    .populate("tracks")
+    .populate("likes")
+    .populate("following")
+    .populate("followers")
+    .then(users => {
+        console.log(users);
+        res.status(200).json(users);
+    })
+    .catch((err) => next(err));
+})
+
 // Get user by ID
 router.get("/users/:id", (req, res, next) => {
     const id = req.params.id;

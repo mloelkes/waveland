@@ -110,7 +110,7 @@ input:focus {
     margin: 0 60px;
 }
 
-.navigation-content #user-logged-in-dashboard-waves #logo {
+.navigation-content #logo {
     width: 64px;
     position: relative;
     top: 3px;
@@ -383,6 +383,8 @@ input:focus {
     justify-content: flex-start;
     border-radius: 10px;
     margin: 120px 60px 120px 30px;
+    /* border: 2px solid var(--border); */
+    /* border-radius: 10px; */
 }
 
 .Profile > * {
@@ -523,9 +525,12 @@ input:focus {
 }
 
 .Followers .headline, .Following .headline, .Likes .headline {
-    font-family: 'Vollkorn', serif;
-    font-size: 24px;
+    font-size: 20px;
     margin: 0 0 30px 0;
+}
+
+.Following .headline, .Likes .headline {
+    margin-top: 30px;
 }
 
 .Followers .followers-content, .Following .following-content, .Likes .likes-content {
@@ -536,34 +541,33 @@ input:focus {
     flex-wrap: wrap;
     padding: 20px 20px 20px 0;
     margin: 0 0 30px 0;
-    /* border: 2px solid var(--border); */
-    background-color: var(--accent);
+    background-color: rgb(125, 53, 218, 0.3);
     border-radius: 10px;
 }
 
 .Followers .follower, .Following .followed {
-    margin: 5px 30px;
+    margin: 5px 24px;
 }
 
 .Likes .likes-content button {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    margin: 5px 30px 5px 15px;
+    margin: 10px 30px 10px 15px;
 }
 
 .Likes .likes-content #track-cover {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 10px;
 }
 
 .Followers #follower-image, .Following #followed-image {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -618,6 +622,21 @@ input:focus {
 .player-container #player-mute {
     width: 23px;
     margin-top: 3px;
+    cursor: pointer;
+}
+
+#random-button {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-image: url("/public/images/hassaan-qaiser-bKfkhVRAJTQ-unsplash.jpg");
+    background-position: 0% 0%;
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: 2;
+    /* bottom: 20px; */
+    right: 60px;
+    border-radius: 50%;
     cursor: pointer;
 }
 

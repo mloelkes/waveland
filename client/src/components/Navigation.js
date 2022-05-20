@@ -20,7 +20,7 @@ function Navigation() {
                         <Link className="font-accent" to="/dashboard"><img id="logo" src="/images/icons/7a.png" alt="waveland logo"/></Link>
                         
                     </span> :
-                    <Link className="font-accent" to="/">Waveland</Link>
+                    <Link className="font-accent" to="/"><img id="logo" src="/images/icons/7a.png" alt="waveland logo"/></Link>
                 }
                 {isLoggedIn ? 
                 <span id="user-logged-in-profile-logout">

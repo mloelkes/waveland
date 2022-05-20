@@ -88,7 +88,7 @@ function ProfileDetails(props) {
             <p>{props.user?.description}</p>
             <p>{props.user?.location}</p>
             <div className="follow-button-container">
-                {!(userDetails?._id === props.user?._id) && <button className={following ? "following-button following" : "following-button not-following"} onClick={handleFollowClick}>{following ? "Following" : "Follow"}</button>}
+                {!(userDetails?._id === props?.user?._id) && <button className={following ? "following-button following" : "following-button not-following"} onClick={handleFollowClick}>{following ? "Following" : "Follow"}</button>}
             </div>
 
         </div>

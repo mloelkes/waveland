@@ -54,7 +54,7 @@ function Profile (props) {
             </div>
             <div className="col-3">
                 <Followers user={user}></Followers>
-                <Following user={user}></Following>
+                {user?.following?.length > 0 && <Following user={user}></Following>}
                 {user?.likes?.length > 0 && <Likes tracks={user?.likes} handlePlayTrack={handlePlayTrack}></Likes>}
             </div>
         </div>

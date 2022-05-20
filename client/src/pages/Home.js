@@ -4,7 +4,7 @@ function Home() {
 	return (
         <div className="Home">
             <div className="message">
-                <h1>Share your ideas and tracks with the world.</h1>
+                <h1>Share your ideas and waves with the world.</h1>
             </div>
         </div>
 	)
