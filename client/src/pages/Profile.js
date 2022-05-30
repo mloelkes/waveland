@@ -13,8 +13,10 @@ function Profile (props) {
     const [user, setUser] = useState(undefined);
     const [tracks, setTracks] = useState(undefined);
 
+    const storedToken = localStorage.getItem('authToken');
+
     function initializeData() {
-        axios.get(`/api/users?nameForUrl=${nameForUrl}`)
+        axios.get(`/api/users?nameForUrl=${nameForUrl}`, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             setUser(response.data);
             getUserTracks(response.data._id);
@@ -25,7 +27,7 @@ function Profile (props) {
     }
 
     function getUserTracks(id) {
-        axios.get(`/api/users/${id}/tracks`)
+        axios.get(`/api/users/${id}/tracks`, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             setTracks(response.data);
         })

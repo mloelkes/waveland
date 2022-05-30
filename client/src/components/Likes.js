@@ -6,8 +6,10 @@ function Likes(props) {
         const trackImage = e.target.parentNode.attributes.trackimage.value;
         const trackName = e.target.parentNode.attributes.trackname.value;
         const userId = e.target.parentNode.attributes.userid.value;
+
+        const storedToken = localStorage.getItem('authToken');
         
-        axios.get(`api/users/${userId}`)
+        axios.get(`api/users/${userId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             const artistName = response.data.name;
             props.handlePlayTrack(trackUrl, trackImage, trackName, artistName);

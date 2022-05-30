@@ -11,8 +11,10 @@ function Waves(props) {
     const [tracks, setTracks] = useState([]);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
+    const storedToken = localStorage.getItem('authToken');
+
     function getTracksByFollowedUsers() {
-        axios.get(`api/users/${user?._id}/following/tracks`)
+        axios.get(`api/users/${user?._id}/following/tracks`, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             setTracks(response.data);
         })

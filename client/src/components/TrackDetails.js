@@ -11,6 +11,8 @@ function TrackDetails(props) {
     const heartFilledUrl = "/images/icons/baseline_favorite_black_48dp.png";
     const heartOutlinedUrl = "/images/icons/baseline_favorite_border_black_48dp.png";
 
+    const storedToken = localStorage.getItem('authToken');
+
     const [trackLiked, setTrackLiked] = useState(false);
     const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -58,7 +60,7 @@ function TrackDetails(props) {
             trackId: props.track._id
         };
 
-        axios.patch(route, likesFormData)
+        axios.patch(route, likesFormData, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
         })
         .catch(err => {

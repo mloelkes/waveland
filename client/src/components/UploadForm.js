@@ -17,6 +17,8 @@ function UploadForm() {
     const [trackUrl, setTrackUrl] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
 
+    const storedToken = localStorage.getItem('authToken');
+
     const navigate = useNavigate();
 
     // Upload track
@@ -27,7 +29,7 @@ function UploadForm() {
         const uploadTrackData = new FormData();
         uploadTrackData.append("trackUrl", trackToUpload);
 
-        axios.post("api/trackUpload", uploadTrackData)
+        axios.post("api/trackUpload", uploadTrackData, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             setTrackUrl(response.data.trackUrl);
             setUploadTrackLabel("Wave uploaded");
@@ -46,21 +48,21 @@ function UploadForm() {
         uploadImageData.append("imageUrl", imageToUpload);
 
         // Upload track image
-        axios.post("api/imageUpload", uploadImageData)
+        axios.post("api/imageUpload", uploadImageData, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             const user = userDetails._id;
             const imageUrl = response.data.imageUrl;
 
             // Create track
             const requestBody = { name, tag, description, imageUrl, trackUrl, user }
-            axios.post("/api/tracks", requestBody)
+            axios.post("/api/tracks", requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
                 let tracks = userDetails.tracks.slice();
                 tracks.push(response.data.track._id);
                 const requestBody = { tracks };
                 
                 // Update user tracks
-                axios.patch(`api/users/${userDetails._id}/tracks`, requestBody)
+                axios.patch(`api/users/${userDetails._id}/tracks`, requestBody, { headers: { Authorization: `Bearer ${storedToken}` } })
                 .then(() => {
                     getUserDetails();
                     navigate("/dashboard");

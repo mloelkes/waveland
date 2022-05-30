@@ -9,6 +9,8 @@ function ProfileDetails(props) {
     const [errorMessage, setErrorMessage] = useState(undefined);
     const [following, setFollowing] = useState(false);
 
+    const storedToken = localStorage.getItem('authToken');
+
     useEffect(() => {
         setFollowing(false);
 
@@ -35,14 +37,14 @@ function ProfileDetails(props) {
         };
 
         // Update following user
-        axios.patch(`api/users/${userDetails._id}/following`, followingFormData)
+        axios.patch(`api/users/${userDetails._id}/following`, followingFormData, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             let followersFormData = {
                 followingUserId: userDetails._id
             };
 
             // Update followed user
-            axios.patch(`api/users/${props.user?._id}/followers`, followersFormData)
+            axios.patch(`api/users/${props.user?._id}/followers`, followersFormData, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setFollowing(true);
             })
@@ -62,13 +64,13 @@ function ProfileDetails(props) {
             followedUserId: props.user?._id
         };
 
-        axios.patch(`api/users/${userDetails._id}/following/delete`, followingFormData)
+        axios.patch(`api/users/${userDetails._id}/following/delete`, followingFormData, { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             let followedFormData = {
                 followingUserId: userDetails._id
             };
     
-            axios.patch(`api/users/${props.user?._id}/followers/delete`, followedFormData)
+            axios.patch(`api/users/${props.user?._id}/followers/delete`, followedFormData, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setFollowing(false);
             })

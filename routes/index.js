@@ -7,7 +7,7 @@ const trackUploader = require("../config/cloudinary.tracks.config");
 const { default: mongoose } = require("mongoose");
 
 // Get all users
-router.get("/users/all", (req, res, next) => {
+router.get("/users/all", isAuthenticated, (req, res, next) => {
     User.find()
     .populate("tracks")
     .populate("likes")
@@ -21,7 +21,7 @@ router.get("/users/all", (req, res, next) => {
 })
 
 // Get user by ID
-router.get("/users/:id", (req, res, next) => {
+router.get("/users/:id", isAuthenticated, (req, res, next) => {
     const id = req.params.id;
 
     if (id === "") {
@@ -46,7 +46,7 @@ router.get("/users/:id", (req, res, next) => {
 });
 
 // Get user by nameForUrl
-router.get("/users", (req, res, next) => {
+router.get("/users", isAuthenticated, (req, res, next) => {
     const nameForUrl = req.query.nameForUrl;
 
     if (nameForUrl === "") {
@@ -72,7 +72,7 @@ router.get("/users", (req, res, next) => {
 });
 
 // Add like to user array
-router.patch("/users/:id/likes", (req, res, next) => {
+router.patch("/users/:id/likes", isAuthenticated, (req, res, next) => {
     const userId = req.params.id;
     const { trackId } = req.body;
 
@@ -104,7 +104,7 @@ router.patch("/users/:id/likes", (req, res, next) => {
 });
 
 // Remove like from user array
-router.patch("/users/:id/likes/remove", (req, res, next) => {
+router.patch("/users/:id/likes/remove", isAuthenticated, (req, res, next) => {
     const userId = req.params.id;
     const { trackId } = req.body;
 
@@ -137,7 +137,7 @@ router.patch("/users/:id/likes/remove", (req, res, next) => {
 });
 
 // Update user following
-router.patch("/users/:id/following", (req, res, next) => {
+router.patch("/users/:id/following", isAuthenticated, (req, res, next) => {
     const followingUserId = req.params.id;
     const { followedUserId } = req.body;
 
@@ -167,7 +167,7 @@ router.patch("/users/:id/following", (req, res, next) => {
 })
 
 // Delete user following
-router.patch("/users/:id/following/delete", (req, res, next) => {
+router.patch("/users/:id/following/delete", isAuthenticated, (req, res, next) => {
     const followingUserId = req.params.id;
     const { followedUserId } = req.body;
 
@@ -197,7 +197,7 @@ router.patch("/users/:id/following/delete", (req, res, next) => {
 })
 
 // Update user followers
-router.patch("/users/:id/followers", (req, res, next) => {
+router.patch("/users/:id/followers", isAuthenticated, (req, res, next) => {
     const followedUserId = req.params.id;
     const { followingUserId } = req.body;
 
@@ -227,7 +227,7 @@ router.patch("/users/:id/followers", (req, res, next) => {
 })
 
 // Delete user followers
-router.patch("/users/:id/followers/delete", (req, res, next) => {
+router.patch("/users/:id/followers/delete", isAuthenticated, (req, res, next) => {
     const followedUserId = req.params.id;
     const { followingUserId } = req.body;
 
@@ -257,7 +257,7 @@ router.patch("/users/:id/followers/delete", (req, res, next) => {
 })
 
 // Update user tracks
-router.patch("/users/:id/tracks", (req, res, next) => {
+router.patch("/users/:id/tracks", isAuthenticated, (req, res, next) => {
     console.log("Update user tracks called", req.body);
     const id = req.params.id;
     const { tracks } = req.body;
@@ -281,7 +281,7 @@ router.patch("/users/:id/tracks", (req, res, next) => {
 })
 
 // Get user tracks
-router.get("/users/:id/tracks", (req, res, next) => {
+router.get("/users/:id/tracks", isAuthenticated, (req, res, next) => {
     const id = req.params.id;
 
     if (id === "") {
@@ -307,7 +307,7 @@ router.get("/users/:id/tracks", (req, res, next) => {
 })
 
 // Get all tracks by users followed by specified user
-router.get("/users/:id/following/tracks", (req, res, next) => {
+router.get("/users/:id/following/tracks", isAuthenticated, (req, res, next) => {
     const id = req.params.id;
   
     if (id === "") {
@@ -333,7 +333,7 @@ router.get("/users/:id/following/tracks", (req, res, next) => {
   });
 
 // Get track by ID
-router.get("/tracks/:id", (req, res, next) => {
+router.get("/tracks/:id", isAuthenticated, (req, res, next) => {
   const id = req.params.id;
 
   if (id === "") {
@@ -357,7 +357,7 @@ router.get("/tracks/:id", (req, res, next) => {
 });
 
 // Create track
-router.post("/tracks", (req, res, next) => {
+router.post("/tracks", isAuthenticated, (req, res, next) => {
     console.log("Create track called", req.body);
     const { name, tag, description, imageUrl, trackUrl, user } = req.body;
 
@@ -389,7 +389,7 @@ router.post("/tracks", (req, res, next) => {
 });
 
 // Image upload on cloudinary
-router.post("/imageUpload", imageUploader.single("imageUrl"), (req, res, next) => {
+router.post("/imageUpload", isAuthenticated, imageUploader.single("imageUrl"), (req, res, next) => {
     console.log("Upload image called", req.body);
     if (!req.file) {
         next(new Error("Image upload failed."));
@@ -400,7 +400,7 @@ router.post("/imageUpload", imageUploader.single("imageUrl"), (req, res, next) =
 });
 
 // Track upload on cloudinary
-router.post("/trackUpload", trackUploader.single("trackUrl"), (req, res, next) => {
+router.post("/trackUpload", isAuthenticated, trackUploader.single("trackUrl"), (req, res, next) => {
   if (!req.file) {
     next(new Error("Track upload failed."));
     return;

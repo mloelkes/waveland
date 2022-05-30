@@ -12,6 +12,8 @@ function Player (props) {
     const isInitialMount = useRef(true);
     let audioReference = useRef(0);
 
+    const storedToken = localStorage.getItem('authToken');
+
     const { isLoggedIn } = useContext(AuthContext);
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -58,7 +60,7 @@ function Player (props) {
     }
 
     function handleRandomButtonClick() {
-        axios.get("/api/users/all")
+        axios.get("/api/users/all", { headers: { Authorization: `Bearer ${storedToken}` } })
         .then(response => {
             const users = response.data;
             const random = Math.floor(Math.random() * users.length);
