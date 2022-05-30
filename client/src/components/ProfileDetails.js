@@ -10,6 +10,8 @@ function ProfileDetails(props) {
     const [following, setFollowing] = useState(false);
 
     useEffect(() => {
+        setFollowing(false);
+
         userDetails?.following.forEach(followedUser => {
             if (props.user?._id === followedUser._id) {
                 setFollowing(true);
