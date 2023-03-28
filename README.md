@@ -2,7 +2,7 @@
 
 A platform to upload, play and like sounds. Visit other user profiles and follow them - their newest tracks will appear in your *Stream*.\
 Built with *React*, *Node.js*, *Express.js* and *MongoDB*.\
-Enjoy the [waves](https://waveland.herokuapp.com/).
+Enjoy the [waves](https://waveland-client.netlify.app/).
 
 ## Setup
 
